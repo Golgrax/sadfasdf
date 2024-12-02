@@ -1,0 +1,192 @@
+<PetTabScreen>:
+    name: "pet_tab"
+    canvas.before:
+        Color:
+            rgba: 243/255, 233/255, 226/255, 1
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+    MDBoxLayout:
+        orientation: 'vertical'
+
+        # Top App Bar
+        MDTopAppBar:
+            title: "Pet"
+            font_name: "BPoppins"
+            elevation: 0
+            md_bg_color: 235/255.0, 143/255.0, 52/255.0, 1
+            specific_text_color: 1, 1, 1, 1
+            size_hint_y: None
+            height: dp(50)
+
+        # Main Content with ScrollView
+        ScrollView:
+            do_scroll_x: False
+            bar_width: 0  # Hide the scroll bar
+            canvas.before:
+                Color:
+                    rgba: 243/255, 233/255, 226/255, 1
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+
+            BoxLayout:
+                orientation: 'vertical'
+                size_hint_y: None
+                height: self.minimum_height
+                padding: dp(10)
+
+                # Pet Profile Header
+                BoxLayout:
+                    orientation: 'horizontal'
+                    size_hint: 0.9, None
+                    height: dp(50)
+                    pos_hint: {"center_x": 0.5}
+                    spacing: dp(10)
+
+                    MDLabel:
+                        text: "Pet Profile"
+                        font_name: "BPoppins"
+                        font_size: "20sp"
+                        halign: "left"
+                        valign: "middle"
+                        color: 0, 0, 0, 1
+
+                    Image:
+                        source: "assets/pet_profile_icon.png"
+                        size_hint: None, None
+                        size: "40dp", "40dp"
+                        allow_stretch: True
+                        keep_ratio: True
+
+                # Add Image Button
+                AnchorLayout:
+                    anchor_x: 'center'
+                    size_hint_y: None
+                    height: dp(100)
+
+                    Image:
+                        source: "assets/add_image.png"
+                        size_hint: None, None
+                        size: "80dp", "80dp"
+                        allow_stretch: True
+                        keep_ratio: True
+
+                # Profile Info Section
+                GridLayout:
+                    cols: 2
+                    spacing: dp(10)
+                    size_hint: 0.9, None
+                    height: dp(180)
+                    pos_hint: {"center_x": 0.5}
+
+                    TextInput:
+                        id: pet_name_input
+                        hint_text: "Pet's Name"
+                        font_name: "MPoppins"
+                        size_hint_y: None
+                        height: dp(40)
+                        multiline: False
+                        background_color: 1, 1, 1, 0
+                        foreground_color: 0, 0, 0, 1
+                        cursor_color: 0, 0, 0, 1
+                        padding: dp(5)
+
+                    TextInput:
+                        id: pet_breed_input
+                        hint_text: "Breed"
+                        font_name: "MPoppins"
+                        size_hint_y: None
+                        height: dp(40)
+                        multiline: False
+                        background_color: 1, 1, 1, 0
+                        foreground_color: 0, 0, 0, 1
+                        cursor_color: 0, 0, 0, 1
+                        padding: dp(5)
+
+                    MDRaisedButton:
+                        id: gender_dropdown
+                        text: "Select Gender"
+                        on_release: root.open_gender_menu()
+
+                    TextInput:
+                        id: pet_age_input
+                        hint_text: "Age"
+                        font_name: "MPoppins"
+                        input_filter: "int"
+                        size_hint_y: None
+                        height: dp(40)
+                        multiline: False
+                        background_color: 1, 1, 1, 0
+                        foreground_color: 0, 0, 0, 1
+                        cursor_color: 0, 0, 0, 1
+                        padding: dp(10)
+
+                # Save Button Section
+                AnchorLayout:
+                    anchor_x: "center"
+                    size_hint_y: None
+                    height: dp(70)
+
+                    Button:
+                        text: "Save Changes"
+                        size_hint: 0.5, None
+                        height: dp(50)
+                        font_name: "BPoppins"
+                        font_size: "14sp"
+                        background_color: 0, 0, 0, 0
+                        color: 1, 1, 1, 1
+                        on_release: root.save_pet_profile()
+                        canvas.before:
+                            Color:
+                                rgba: 0.31, 0.21, 0.18, 1
+                            RoundedRectangle:
+                                size: self.size
+                                pos: self.pos
+                                radius: [10]
+
+        # Bottom Navigation
+        MDBottomNavigation:
+            panel_color: 250/255, 177/255, 47/255, 1
+            size_hint_y: 0.2
+            
+            MDBottomNavigationItem:
+                name: "home"
+                text: "Home"
+                icon: "home"
+                on_tab_press: root.home()
+                text_color_active: 235/255, 143/255, 52/255, 1
+                md_bg_color: 243/255, 233/255, 226/255, 1
+
+            MDBottomNavigationItem:
+                name: "activitylogs"
+                text: "Activity Logs"
+                icon: "file-document"
+                on_tab_press: root.activity_logs()
+                text_color_active: 235/255, 143/255, 52/255, 1
+                md_bg_color: 243/255, 233/255, 226/255, 1
+
+            MDBottomNavigationItem:
+                name: "camera"
+                text: "Camera"
+                icon: "camera"
+                on_tab_press: root.go_to_live_feed()
+                text_color_active: 235/255, 143/255, 52/255, 1
+                md_bg_color: 243/255, 233/255, 226/255, 1
+
+            MDBottomNavigationItem:
+                name: "pet"
+                text: "Pet"
+                icon: "dog"
+                on_tab_press: root.pet_tab()
+                text_color_active: 235/255, 143/255, 52/255, 1
+                md_bg_color: 243/255, 233/255, 226/255, 1
+
+            MDBottomNavigationItem:
+                name: "profile"
+                text: "Profile"
+                icon: "account"
+                on_tab_press: root.profile_tab()
+                text_color_active: 235/255, 143/255, 52/255, 1
+                md_bg_color: 243/255, 233/255, 226/255, 1

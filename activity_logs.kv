@@ -1,0 +1,172 @@
+<ActivityLogsScreen>:
+    name: "activity_logs"
+
+    canvas.before:
+        Color:
+            rgba: 243/255, 233/255, 226/255, 1
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+    MDBoxLayout:
+        orientation: 'vertical'
+
+        # Top AppBar with title
+        MDTopAppBar:
+            title: "Activity Logs"
+            font_name: "BPoppins"
+            pos_hint: {"top": 1}
+            elevation: 0
+            md_bg_color: 235/255, 143/255, 52/255, 1  # Orange
+            size_hint_y: None
+            height: dp(45)
+
+        MDBoxLayout:
+            padding: dp(10), dp(5)
+            orientation: 'vertical'
+            spacing: dp(10)
+
+            # User greeting
+            MDBoxLayout:
+                orientation: 'horizontal'
+                spacing: dp(10)
+                size_hint_y: None
+                height: dp(50)
+
+                MDIcon:
+                    icon: "account-circle"
+                    size_hint: None, None
+                    size: dp(40), dp(40)
+                    pos_hint: {"center_y": 0.5}
+                    theme_text_color: "Custom"
+                    text_color: 79/255, 54/255, 48/255, 1  # Brown
+
+                MDBoxLayout:
+                    orientation: 'vertical'
+
+                    MDLabel:
+                        text: "Hello, Name"
+                        font_name: "BPoppins"
+                        theme_text_color: "Custom"
+                        text_color: 79/255, 54/255, 48/255, 1  # Brown
+                        font_size: "18sp"
+                        halign: "left"
+
+                    MDLabel:
+                        text: "Date"
+                        font_name: "BPoppins"
+                        theme_text_color: "Hint"
+                        font_size: "12sp"
+                        halign: "left"
+
+            # Scrollable Activity Logs Section
+            ScrollView:
+                MDList:
+                    id: scroll_list
+                    spacing: dp(15)
+
+
+                    # Example Red Alert Section
+                    MDBoxLayout:
+                        orientation: 'horizontal'
+                        size_hint_y: None
+                        height: dp(70)
+                        md_bg_color: 73/255, 54/255, 40/255, 1 #brown
+                        radius: [dp(10)]
+                        
+
+                        MDLabel:
+                            text: "Time"
+                            font_name: "BPoppins"
+                            theme_text_color: "Custom"
+                            text_color: 1, 1, 1, 1  # White
+                            font_size: "16sp"
+                            halign: "center"
+                            size_hint_x: 0.3
+
+                        MDLabel:
+                            text: "Pet's Activity"
+                            font_name: "BPoppins"
+                            theme_text_color: "Custom"
+                            text_color: 1, 1, 1, 1  # White
+                            font_size: "16sp"
+                            halign: "center"
+                            size_hint_x: 0.7
+
+                        MDIcon:
+                            icon: "alert-circle"
+                            theme_text_color: "Custom"
+                            text_color: 1, 1, 1, 1  # White icon
+
+                    # Example Regular Entry Section
+                    MDBoxLayout:
+                        orientation: 'horizontal'
+                        size_hint_y: None
+                        height: dp(70)
+                        md_bg_color: 1, 1, 1, 1  # White background
+                        radius: [dp(10)]
+
+                        MDLabel:
+                            text: "Time"
+                            font_name: "BPoppins"
+                            theme_text_color: "Custom"
+                            text_color: 79/255, 54/255, 48/255, 1  # Brown
+                            font_size: "16sp"
+                            halign: "center"
+                            size_hint_x: 0.3
+
+                        MDLabel:
+                            text: "Pet's Activity"
+                            font_name: "BPoppins"
+                            theme_text_color: "Custom"
+                            text_color: 79/255, 54/255, 48/255, 1  # Brown
+                            font_size: "16sp"
+                            halign: "center"
+                            size_hint_x: 0.7
+        
+
+        MDBottomNavigation:
+            panel_color: 250/255, 177/255, 47/255, 1
+            md_bg_color: 250/255, 177/255, 47/255, 1
+            size_hint_y: 0.2
+
+            MDBottomNavigationItem:
+                name: "home"
+                text: "Home"
+                icon: "home"
+                on_tab_press: root.home()
+                text_color_active: 235/255, 143/255, 52/255, 1  # Orange text when selected
+                md_bg_color: 243/255, 233/255, 226/255, 1
+
+            MDBottomNavigationItem:
+                name: "activitylogs"
+                text: "Activity Logs"
+                icon: "file-document"
+                on_tab_press: root.activity_logs()
+                text_color_active: 235/255, 143/255, 52/255, 1  # Orange text when selected
+                md_bg_color: 243/255, 233/255, 226/255, 1
+                
+
+            MDBottomNavigationItem:
+                name: "camera"
+                text: "Camera"
+                icon: "camera"
+                on_tab_press: root.go_to_live_feed()
+                text_color_active: 235/255, 143/255, 52/255, 1  # Orange text when selected
+                md_bg_color: 243/255, 233/255, 226/255, 1
+
+            MDBottomNavigationItem:
+                name: "pet"
+                text: "Pet"
+                icon: "dog"
+                on_tab_press: root.pet_tab()
+                text_color_active: 235/255, 143/255, 52/255, 1  # Orange text when selected
+                md_bg_color: 243/255, 233/255, 226/255, 1
+
+            MDBottomNavigationItem:
+                name: "profile"
+                text: "Profile"
+                icon: "account"
+                on_tab_press: root.profile_tab()
+                text_color_active: 235/255, 143/255, 52/255, 1  # Orange text when selected
+                md_bg_color: 243/255, 233/255, 226/255, 1

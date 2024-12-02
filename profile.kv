@@ -1,0 +1,152 @@
+<ProfileScreen>:
+    name: "profile"
+    canvas.before:
+        Color:
+            rgba: 243/255, 233/255, 226/255, 1
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+    MDFloatLayout:
+        # Top illustration section - Made bigger
+        AnchorLayout:
+            anchor_x: 'center'
+            anchor_y: 'top'
+            size_hint_y: 0.5  # Increased from 0.3
+            size: "900dp", "900dp"  # Increased from 500dp
+            pos_hint: {"center_x": 0.5, "top": 1}
+
+            Image:
+                source: "assets/profile_tab.png"
+                size_hint: 1, 1
+                size: "1000dp", "1000dp"
+                allow_stretch: True
+                keep_ratio: True
+
+        # Profile picture, full name, and email box layout - Adjusted position
+        MDBoxLayout:
+            orientation: 'vertical'
+            size_hint: 0.9, 0.45  # Slightly reduced height
+            pos_hint: {"center_x": 0.5, "top": 0.58}  # Moved down from 0.7
+            padding: [20, 20]
+            spacing: 20
+            md_bg_color: (235/255, 143/255, 52/255, 1)  # Orange background
+            radius: [20]  # Rounded corners
+            elevation: 10
+
+            # Profile picture section
+            AnchorLayout:
+                anchor_x: 'center'
+                anchor_y: 'top'
+                size_hint_y: None
+                height: "120dp"
+
+                Image:
+                    source: "assets/profile_icon.png" 
+                    size_hint: None, None
+                    size: "100dp", "100dp"
+                    allow_stretch: True
+                    keep_ratio: True
+
+            # Profile Label
+            MDLabel:
+                text: "Profile"
+                font_name: "BPoppins"
+                font_size: "22sp"
+                halign: "center"
+                color: (79/255, 54/255, 48/255, 1)  # Brown color
+
+            # Full Name and Email
+            BoxLayout:
+                orientation: 'vertical'
+                size_hint_y: None
+                height: "80dp"  # Reduced height for thinner background
+                spacing: 10
+
+                # Full Name Box
+                BoxLayout:
+                    orientation: 'horizontal'
+                    size_hint_y: None
+                    height: "30dp"  # Reduced height for thinner background
+                    spacing: 10
+
+                    canvas.before:
+                        Color:
+                            rgba: (1, 1, 1, 1)  # White background
+                        RoundedRectangle:
+                            pos: self.pos
+                            size: self.size
+                            radius: [12]  # Rounded corners
+
+                    MDLabel:
+                        text: "Full Name: "
+                        font_name: "MPoppins"
+                        font_size: "16sp"
+                        halign: "left"
+                        valign: "middle"
+                        color: (79/255, 54/255, 48/255, 1)  # Brown color
+
+                    MDLabel:
+                        id: full_name_label
+                        text: "John Doe"
+                        font_name: "MPoppins"
+                        font_size: "16sp"
+                        halign: "left"
+                        valign: "middle"
+                        color: (79/255, 54/255, 48/255, 1)  # Brown color
+
+                # Email Box
+                BoxLayout:
+                    orientation: 'horizontal'
+                    size_hint_y: None
+                    height: "30dp"  # Reduced height for thinner background
+                    spacing: 10
+
+                    canvas.before:
+                        Color:
+                            rgba: (1, 1, 1, 1)  # White background
+                        RoundedRectangle:
+                            pos: self.pos
+                            size: self.size
+                            radius: [12]  # Rounded corners
+
+                    MDLabel:
+                        text: "Email: "
+                        font_name: "MPoppins"
+                        font_size: "16sp"
+                        halign: "left"
+                        valign: "middle"
+                        color: (79/255, 54/255, 48/255, 1)  # Brown color
+
+                    MDLabel:
+                        id: email_label
+                        text: "john.doe@example.com"
+                        font_name: "MPoppins"
+                        font_size: "16sp"
+                        halign: "left"
+                        valign: "middle"
+                        color: (79/255, 54/255, 48/255, 1)  # Brown color
+
+        # Next button section
+        AnchorLayout:
+            anchor_x: "right" 
+            anchor_y: "bottom"
+            size_hint: 1, 0.2
+            padding: [0, 0, 10, 10]
+
+            Button:
+                text: "Next >"
+                size_hint: 0.35, None
+                height: "50dp"
+                font_name: "BPoppins"
+                font_size: "16sp"
+                background_color: 0, 0, 0, 0
+                color: 1, 1, 1, 1  # White text
+                on_release: app.next_step()
+                canvas.before:
+                    Color:
+                        rgba: (79/255, 54/255, 48/255, 1)  # Brown button background
+                    RoundedRectangle:
+                        size: self.size
+                        pos: self.pos
+                        radius: [10]

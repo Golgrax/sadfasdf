@@ -1,0 +1,198 @@
+<EditProfileScreen>:
+    name: "edit_profile"
+    canvas.before:
+        Color:
+            rgba: 251/255, 228/255, 189/255, 1 #change color
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+    MDFloatLayout:
+        # Top illustration section - Made bigger
+        AnchorLayout:
+            anchor_x: 'center'
+            anchor_y: 'top'
+            size_hint_y: 0.5  # Increased from 0.3
+            size: "900dp", "900dp"  # Increased from 500dp
+            pos_hint: {"center_x": 0.5, "top": 1}
+
+            Image:
+                source: "assets/profile_tab.png"
+                size_hint: 1, 1
+                size: "1000dp", "1000dp"
+                allow_stretch: True
+                keep_ratio: False
+
+        # Edit profile picture, full name, and email box layout - Adjusted position
+        MDBoxLayout:
+            orientation: 'vertical'
+            size_hint: 0.9, 0.45  # Slightly reduced height
+            pos_hint: {"center_x": 0.5, "top": 0.58}  # Moved down from 0.7
+            padding: [20, 20]
+            spacing: 20
+            md_bg_color: (235/255, 143/255, 52/255, 1)  # Orange background
+            radius: [20]  # Rounded corners
+            elevation: 10
+
+            # Edit profile picture section
+            AnchorLayout:
+                anchor_x: 'center'
+                anchor_y: 'top'
+                size_hint_y: None
+                height: "120dp"
+
+                Image:
+                    source: "assets/profile_icon.png" 
+                    size_hint: None, None
+                    size: "100dp", "100dp"
+                    allow_stretch: True
+                    keep_ratio: True
+
+            # Edit Profile Label
+            MDLabel:
+                text: "Edit Profile"
+                font_name: "BPoppins"
+                font_size: "22sp"
+                halign: "center"
+                color: (79/255, 54/255, 48/255, 1)  # Brown color
+
+            # Full Name and Email fields
+            BoxLayout:
+                orientation: 'vertical'
+                size_hint_y: None
+                height: "100dp"  # Adjusted to accommodate larger input fields
+                spacing: 10
+
+                # Full Name Box
+                BoxLayout:
+                    orientation: 'horizontal'
+                    size_hint_y: None
+                    height: "50dp"  # Adjusted height for better spacing
+                    spacing: 10
+
+                    canvas.before:
+                        Color:
+                            rgba: (1, 1, 1, 1)  # White background
+                        RoundedRectangle:
+                            pos: self.pos
+                            size: self.size
+                            radius: [12]  # Rounded corners
+
+                    MDLabel:
+                        text: "Full Name: "
+                        font_name: "MPoppins"
+                        font_size: "16sp"
+                        halign: "left"
+                        valign: "middle"
+                        color: (79/255, 54/255, 48/255, 1)  # Brown color
+
+                    TextInput:
+                        id: edit_full_name_input
+                        font_name: "MPoppins"
+                        font_size: "16sp"
+                        multiline: False
+                        hint_text: "Enter full name"
+                        background_color: 1, 1, 1, 0
+                        foreground_color: 0, 0, 0, 1
+                        cursor_color: 0, 0, 0, 1
+                        size_hint_x: None
+                        width: "200dp"  # Adjusted width for more compact input
+                        pos_hint: {"center_y": 0.5}  # Centered vertically within the box
+
+                # Email Box
+                BoxLayout:
+                    orientation: 'horizontal'
+                    size_hint_y: None
+                    height: "50dp"  # Adjusted height for better spacing
+                    spacing: 10
+
+                    canvas.before:
+                        Color:
+                            rgba: (1, 1, 1, 1)  # White background
+                        RoundedRectangle:
+                            pos: self.pos
+                            size: self.size
+                            radius: [12]  # Rounded corners
+
+                    MDLabel:
+                        text: "Email: "
+                        font_name: "MPoppins"
+                        font_size: "16sp"
+                        halign: "left"
+                        background_color: 1, 1, 1, 0
+                        foreground_color: 0, 0, 0, 1
+                        cursor_color: 0, 0, 0, 1
+                        valign: "middle"
+                        color: (79/255, 54/255, 48/255, 1)  # Brown color
+
+                    TextInput:
+                        id: edit_email_input
+                        font_name: "MPoppins"
+                        font_size: "16sp"
+                        multiline: False
+                        hint_text: "Enter email"
+                        background_color: 1, 1, 1, 0
+                        foreground_color: 0, 0, 0, 1
+                        cursor_color: 0, 0, 0, 1
+                        size_hint_x: None
+                        width: "200dp"  # Adjusted width for more compact input
+                        pos_hint: {"center_y": 0.5}  # Centered vertically within the box
+
+        # Save Changes and Cancel buttons section
+        BoxLayout:
+            orientation: 'horizontal'
+            size_hint: 1, None
+            height: "50dp"  # Reduced height for smaller buttons
+            padding: [20, 0, 20, 10]  # Added padding for spacing between buttons
+            pos_hint: {"center_x": 0.5, "bottom": 0.15}
+            spacing: 20  # Added spacing between the buttons
+            md_bg_color: 243/255, 233/255, 226/255, 1
+
+        AnchorLayout:
+            anchor_x: "left"
+            anchor_y: "bottom"
+            size_hint: 1, 0.5
+            padding: [10, 0, 0, 10]    # Save Changes Button
+
+            # Cancel Button
+            Button:
+                text: "Cancel"
+                size_hint: None, None
+                width: "150dp"  # Reduced width for smaller button
+                height: "50dp"
+                font_name: "BPoppins"
+                font_size: "16sp"
+                background_color: 0, 0, 0, 0
+                color: 1, 1, 1, 1  # White text
+                on_release: app.cancel_changes()
+                canvas.before:
+                    Color:
+                        rgba: (79/255, 54/255, 48/255, 1)  # Brown button background
+                    RoundedRectangle:
+                        size: self.size
+                        pos: self.pos
+                        radius: [10]
+        AnchorLayout:
+            anchor_x: "right"
+            anchor_y: "bottom"
+            size_hint: 1, 0.5
+            padding: [0, 0, 10, 10]
+
+            Button:
+                text: "Save Changes"
+                size_hint: None, None
+                width: "150dp"  # Reduced width for smaller button
+                height: "50dp"
+                font_name: "BPoppins"
+                font_size: "16sp"
+                background_color: 0, 0, 0, 0
+                color: 1, 1, 1, 1  # White text
+                on_press: root.save_changes()
+                canvas.before:
+                    Color:
+                        rgba: (79/255, 54/255, 48/255, 1)  # Brown button background
+                    RoundedRectangle:
+                        size: self.size
+                        pos: self.pos
+                        radius: [10]
+                        

@@ -1,0 +1,190 @@
+<PetProfileScreen>:
+    name: "pet_profile"
+    canvas.before:
+        Color:
+            rgba: 243/255, 233/255, 226/255, 1
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+    MDFloatLayout:
+        # Logo section (PETWATCH)
+        BoxLayout:
+            orientation: 'horizontal'
+            size_hint: 0.9, 0.2
+            pos_hint: {"center_x": 0.5, "top": 1}
+            spacing: 10
+            padding: [20, 10]
+
+            Image:
+                source: "assets/logo2.png"
+                size_hint: None, None
+                size: "80dp", "80dp"
+                allow_stretch: True
+                keep_ratio: True
+
+            MDLabel:
+                text: "PETWATCH"
+                font_name: "BPoppins"
+                font_size: "24sp"
+                halign: "left"
+                valign: "middle"
+                color: 0, 0, 0, 1
+                size_hint_y: None
+
+        # Pet Profile header
+        BoxLayout:
+            orientation: 'horizontal'
+            size_hint: 0.8, 0.2
+            pos_hint: {"center_x": 0.5, "top": 0.9}
+            spacing: 10
+            padding: [0, 10]
+
+            MDLabel:
+                text: "Pet Profile"
+                font_name: "BPoppins"
+                font_size: "24sp"
+                halign: "left"
+                valign: "middle"
+                color: 0, 0, 0, 1
+
+            Image:
+                source: "assets/pet_profile_icon.png"
+                size_hint: None, None
+                size: "50dp", "50dp"
+                allow_stretch: True
+                keep_ratio: True
+
+        # Add image button
+        AnchorLayout:
+            anchor_x: 'center'
+            anchor_y: 'top'
+            size_hint_y: 0.2
+            pos_hint: {"center_x": 0.5, "top": 0.65}
+
+            Image:
+                source: "assets/add_image.png"
+                size_hint: None, None
+                size: "100dp", "100dp"
+                allow_stretch: True
+                keep_ratio: True
+
+        # Profile Info section
+        GridLayout:
+            cols: 2
+            spacing: 10
+            size_hint: 0.8, 0.4
+            pos_hint: {"center_x": 0.5, "top": 0.45}
+
+            TextInput:
+                id: pet_name_input  # Added ID
+                hint_text: "Pet's Name"
+                font_name: "MPoppins"
+                size_hint_y: None
+                height: "40dp"
+                multiline: False
+                background_color: 1, 1, 1, 0
+                foreground_color: 0, 0, 0, 1
+                cursor_color: 0, 0, 0, 1
+                padding: 5
+
+            TextInput:
+                id: pet_breed_input  # Added ID
+                hint_text: "Breed"
+                font_name: "MPoppins"
+                size_hint_y: None
+                height: "40dp"
+                multiline: False
+                background_color: 1, 1, 1, 0
+                foreground_color: 0, 0, 0, 1
+                cursor_color: 0, 0, 0, 1
+                padding: 5
+
+            MDRaisedButton:
+                id: gender_dropdown
+                text: "Select Gender"
+                on_release: root.open_gender_menu()  # Changed to root
+
+            TextInput:
+                id: pet_age_input  # Added ID
+                hint_text: "Age"
+                font_name: "MPoppins"
+                input_filter: "int"  # Allows only integer input
+                size_hint_y: None
+                height: "40dp"
+                multiline: False
+                background_color: 1, 1, 1, 0
+                foreground_color: 0, 0, 0, 1
+                cursor_color: 0, 0, 0, 1
+                padding: 10
+
+        # Save button section
+        AnchorLayout:
+            anchor_x: "center"
+            anchor_y: "top"
+            size_hint: 1, 0.2
+            padding: [0, 5]
+            pos_hint: {"center_x": 0.5, "top": 0.25}
+            Button:
+                text: "Save"
+                size_hint: 0.3, None
+                height: "50dp"
+                font_name: "BPoppins"
+                font_size: "16sp"
+                background_color: 0, 0, 0, 0
+                color: 1, 1, 1, 1
+                on_release: root.save_pet_profile()  # Changed to call the correct method
+                canvas.before:
+                    Color:
+                        rgba: 0.31, 0.21, 0.18, 1
+                    RoundedRectangle:
+                        size: self.size
+                        pos: self.pos
+                        radius: [10]
+
+        # Navigation buttons
+        AnchorLayout:
+            anchor_x: "left"
+            anchor_y: "bottom"
+            size_hint: 1, 0.5
+            padding: [10, 0, 0, 10]
+
+            Button:
+                text: "< Prev"
+                size_hint: 0.35, None
+                height: "50dp"
+                font_name: "BPoppins"
+                font_size: "16sp"
+                background_color: 0, 0, 0, 0
+                color: 1, 1, 1, 1
+                on_release: app.prev_step()
+                canvas.before:
+                    Color:
+                        rgba: 0.31, 0.21, 0.18, 1
+                    RoundedRectangle:
+                        size: self.size
+                        pos: self.pos
+                        radius: [10]
+
+        AnchorLayout:
+            anchor_x: "right"
+            anchor_y: "bottom"
+            size_hint: 1, 0.5
+            padding: [0, 0, 10, 10]
+
+            Button:
+                text: "Next >"
+                size_hint: 0.35, None
+                height: "50dp"
+                font_name: "BPoppins"
+                font_size: "16sp"
+                background_color: 0, 0, 0, 0
+                color: 1, 1, 1, 1
+                on_release: app.next_step_dash()
+                canvas.before:
+                    Color:
+                        rgba: 0.31, 0.21, 0.18, 1
+                    RoundedRectangle:
+                        size: self.size
+                        pos: self.pos
+                        radius: [10]

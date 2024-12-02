@@ -1,0 +1,172 @@
+<LoginScreen>:
+    name: "login"
+    canvas.before:
+        Color:
+            rgba: (255, 255, 255, 255)
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+    MDFloatLayout:
+        # Background Image
+        Image:
+            source: "assets/login.png"
+            allow_stretch: True
+            keep_ratio: False
+            size_hint: 1, 1
+            pos_hint: {"center_x": .5, "center_y": .90}
+
+        MDIconButton:
+            icon: "arrow-left"
+            pos_hint: {"center_y": .95}
+            user_font_size: "30sp"
+            theme_text_color: "Custom"
+            text_color: (26/255, 24/255, 56/255, 255/255)
+            on_release:
+                root.manager.transition.direction = "right"
+                root.manager.current = "main"
+
+        # Bringing down the Welcome text and Sign in labels
+        MDLabel:
+            text: "W e l c o m e!"
+            font_name: "BPoppins"
+            font_size: "26sp"
+            pos_hint: {"center_x": .6, "center_y": .60}  # Changed from .85
+            color: (79/255, 54/255, 48/255, 1)
+
+        MDLabel:
+            text: "Sign in to continue"
+            font_name: "MPoppins"
+            font_size: "18sp"
+            pos_hint: {"center_x": .7, "center_y": .55}  # Changed from .79
+            color: (135/255, 80/255, 18/255, 1)
+
+        # Email Input with Icon
+        MDFloatLayout:
+            size_hint: .7, .07
+            pos_hint: {"center_x": .5, "center_y": .45}
+
+            MDIcon:
+                icon: "email"
+                pos_hint: {"x": 0, "center_y": 0.5}
+                size_hint: None, None
+                size: dp(30), dp(30)
+                theme_text_color: "Custom"
+                text_color: (235/255, 143/255, 52/255, 1)
+
+            TextInput:
+                id: email
+                hint_text: "Email"
+                font_name: "MPoppins"
+                size_hint_y: .75
+                pos_hint: {"center_x": .6, "center_y": 0.5}
+                background_color: 1, 1, 1, 0
+                foreground_color: (0, 0, 0, 1)
+                cursor_color: (0, 0, 0, 1)
+                font_size: "14sp"
+                cursor_width: "2sp"
+                multiline: False
+
+        MDFloatLayout:
+            pos_hint: {"center_x": .45, "center_y": 0}
+            size_hint_y: .03
+            md_bg_color: (178/255, 178/255, 178/255, 1)
+
+        # Password Input with Icon - Moved closer to login button
+        MDFloatLayout:
+            size_hint: .7, .07
+            pos_hint: {"center_x": .5, "center_y": .35}  # Changed from .40
+
+            MDIcon:
+                icon: "lock"
+                pos_hint: {"x": 0, "center_y": 0.5}
+                size_hint: None, None
+                size: dp(30), dp(30)
+                theme_text_color: "Custom"
+                text_color: (235/255, 143/255, 52/255, 1)
+
+            TextInput:
+                id: password
+                hint_text: "Password"
+                font_name: "MPoppins"
+                size_hint_y: .75
+                pos_hint: {"center_x": .6, "center_y": 0.5}
+                background_color: 1, 1, 1, 0
+                foreground_color: (0, 0, 0, 1)
+                cursor_color: (0, 0, 0, 1)
+                font_size: "14sp"
+                cursor_width: "2sp"
+                multiline: False
+                password: True
+
+        # Show Password Checkbox - Moved closer to login button
+        MDFloatLayout:
+            size_hint: .7, .07
+            pos_hint: {"center_x": .5, "center_y": .30}  # Changed from .32
+            MDCheckbox:
+                id: cb
+                size_hint: None, None
+                width: "20dp"
+                height: "20dp"
+                pos_hint: {'center_x': 0, 'center_y': .20}
+                on_press:
+                    password.password = False if password.password == True else True 
+            MDLabel:
+                text: "[ref=Show Password]Show Password[/ref]"
+                font_name: "MPoppins"
+                font_size: "12sp"
+                color: (79/255, 54/255, 48/255, 1)
+                markup: True
+                pos_hint: {'center_x': .6, 'center_y': .20}
+                on_ref_press:
+                    cb.active = False if cb.active == True else True
+                    password.password = False if password.password == True else True
+
+        MDLabel:
+            id: label_error
+            text: ""
+            font_name: "BPoppins"
+            font_size: "12sp"
+            height: self.texture_size[1]
+            pos_hint: {"center_x": .6, "center_y": .25}
+            color: rgba(255, 0, 0, 255)
+
+        Button:
+            text: "LOGIN"
+            size_hint: .66, .065
+            pos_hint: {"center_x": .5, "center_y": .20}
+            background_color: 0, 0, 0, 0
+            font_name: "BPoppins"
+            on_release:
+                root.login(email.text, password.text)
+            canvas.before:
+                Color:
+                    rgba: (79/255, 54/255, 48/255, 1)
+                RoundedRectangle:
+                    size: self.size
+                    pos: self.pos
+                    radius: [5]   
+
+        MDTextButton:
+            text: "Forgot Password?"
+            pos_hint: {"center_x": .5, "center_y": .15}
+            color: (79/255, 54/255, 48/255, 1)
+            font_size: "12sp"
+            font_name: "BPoppins"
+
+        MDLabel:
+            text: "Don't have an account?"
+            font_name: "BPoppins"
+            font_size: "13sp"
+            pos_hint: {"center_x": .68, "center_y": .10}
+            color: (120/255, 89/255, 66/255, 1)
+
+        MDTextButton:
+            text: "Sign up"
+            font_name: "BPoppins"
+            font_size: "13sp"
+            pos_hint: {"center_x": .75, "center_y": .10}
+            color: (120/255, 89/255, 66/255, 1)  
+            on_release:
+                root.manager.transition.direction = "left"
+                root.manager.current = "signup"
